@@ -1,8 +1,26 @@
 [
-    {
-        "name": "banana",
-        "price": 50,
-        "_id": "GVktT",
-        "labels": ["Box game", "Art"]
-    }
+  {
+    "name": "banana",
+    "price": 60,
+    "labels": [
+      "Outdoor",
+      "Puzzle"
+    ],
+    "createdAt": 1684791385188,
+    "inStock": false,
+    "_id": "iPb9j"
+  },
+  {
+    "name": "bla bla",
+    "price": 40,
+    "labels": [
+      "Box game",
+      "Outdoor",
+      "Battery Powered",
+      "Art"
+    ],
+    "createdAt": 1684792020087,
+    "inStock": true,
+    "_id": "VgcOv"
+  }
 ]

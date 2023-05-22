@@ -14,6 +14,27 @@ function query(filterBy = {}) {
         )
     }
 
+    if (filterBy.inStock === 'Yes') {
+        toysToDisplay = toysToDisplay.filter((toy) => toy.inStock)
+    }
+
+    if (filterBy.inStock === 'No') {
+        toysToDisplay = toysToDisplay.filter((toy) => !toy.inStock)
+    }
+
+    // if (filterBy.labels) {
+    //     toysToDisplay = toysToDisplay.filter(
+    //         (toy) => toy.labels.contains()
+    //     )
+    // }
+    if (filterBy.labels) {
+        toysToDisplay = toysToDisplay.filter((toy) =>
+            toy.labels.some((label) => filterBy.labels.includes(label))
+        )
+    } else {
+        toysToDisplay = []
+    }
+
     return Promise.resolve(toysToDisplay)
 }
 
@@ -27,8 +48,8 @@ function remove(toyId) {
     const idx = toys.findIndex((toy) => toy._id === toyId)
     if (idx === -1) return Promise.reject('No Such Toy')
     const toy = toys[idx]
-    if (toy.owner._id !== loggedinUser._id)
-        return Promise.reject('Not your toy')
+    // if (toy.owner._id !== loggedinUser._id)
+    //     return Promise.reject('Not your toy')
     toys.splice(idx, 1)
     return _saveToysToFile()
 }
@@ -41,6 +62,8 @@ function save(toy) {
         toyToUpdate.name = toy.name
         toyToUpdate.price = toy.price
         toyToUpdate.labels = toy.labels
+        toyToUpdate.createdAt = toy.createdAt
+        toyToUpdate.inStock = toy.inStock
     } else {
         toy._id = _makeId()
         // toy.owner = loggedinUser
